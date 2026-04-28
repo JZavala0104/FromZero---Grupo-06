@@ -3,76 +3,76 @@ package pe.edu.upc.fromzero.DTO;
 import java.time.LocalDateTime;
 
 public class ProyectosDTO {
-    private int IdProject;
-    private int IdEmpresa;
-    private String Nombre;
-    private String Descripcion;
-    private double Presupuesto;
-    private String Estado;
-    private LocalDateTime FechaInicio;
-    private LocalDateTime FechaFin;
+    private int idProject;
+    private int idEmpresa;
+    private String nombre;
+    private String descripcion;
+    private double presupuesto;
+    private String estado;
+    private LocalDateTime fechaInicio;
+    private LocalDateTime fechaFin;
 
     public int getIdProject() {
-        return IdProject;
+        return idProject;
     }
 
     public void setIdProject(int idProject) {
-        IdProject = idProject;
+        this.idProject = idProject;
     }
 
     public int getIdEmpresa() {
-        return IdEmpresa;
+        return idEmpresa;
     }
 
     public void setIdEmpresa(int idEmpresa) {
-        IdEmpresa = idEmpresa;
+        this.idEmpresa = idEmpresa;
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
     }
 
     public String getDescripcion() {
-        return Descripcion;
+        return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
-        Descripcion = descripcion;
+        this.descripcion = descripcion;
     }
 
     public double getPresupuesto() {
-        return Presupuesto;
+        return presupuesto;
     }
 
     public void setPresupuesto(double presupuesto) {
-        Presupuesto = presupuesto;
+        this.presupuesto = presupuesto;
     }
 
     public String getEstado() {
-        return Estado;
+        return estado;
     }
 
     public void setEstado(String estado) {
-        Estado = estado;
+        this.estado = estado;
     }
 
     public LocalDateTime getFechaInicio() {
-        return FechaInicio;
+        return fechaInicio;
     }
 
     public void setFechaInicio(LocalDateTime fechaInicio) {
-        FechaInicio = fechaInicio;
+        this.fechaInicio = fechaInicio;
     }
 
     public LocalDateTime getFechaFin() {
-        return FechaFin;
+        return fechaFin;
     }
 
     public void setFechaFin(LocalDateTime fechaFin) {
-        FechaFin = fechaFin;
+        this.fechaFin = fechaFin;
     }
 }

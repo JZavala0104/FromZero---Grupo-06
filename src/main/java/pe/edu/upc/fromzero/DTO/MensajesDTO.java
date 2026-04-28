@@ -3,49 +3,49 @@ package pe.edu.upc.fromzero.DTO;
 import java.time.LocalDateTime;
 
 public class MensajesDTO {
-    private int IdMensaje;
-    private int IdProyecto;
-    private int IdUser;
-    private String Mensaje;
-    private LocalDateTime Fecha;
+    private int idMensaje;
+    private int idProyecto;
+    private int idUser;
+    private String mensaje;
+    private LocalDateTime fecha;
 
     public int getIdMensaje() {
-        return IdMensaje;
+        return idMensaje;
     }
 
     public void setIdMensaje(int idMensaje) {
-        IdMensaje = idMensaje;
+        this.idMensaje = idMensaje;
     }
 
     public int getIdProyecto() {
-        return IdProyecto;
+        return idProyecto;
     }
 
     public void setIdProyecto(int idProyecto) {
-        IdProyecto = idProyecto;
+        this.idProyecto = idProyecto;
     }
 
     public int getIdUser() {
-        return IdUser;
+        return idUser;
     }
 
     public void setIdUser(int idUser) {
-        IdUser = idUser;
+        this.idUser = idUser;
     }
 
     public String getMensaje() {
-        return Mensaje;
+        return mensaje;
     }
 
     public void setMensaje(String mensaje) {
-        Mensaje = mensaje;
+        this.mensaje = mensaje;
     }
 
     public LocalDateTime getFecha() {
-        return Fecha;
+        return fecha;
     }
 
     public void setFecha(LocalDateTime fecha) {
-        Fecha = fecha;
+        this.fecha = fecha;
     }
 }

@@ -1,31 +1,31 @@
 package pe.edu.upc.fromzero.DTO;
 
 public class ProyectoDesarrolladorDTO {
-    private int IdProyDesar;
-    private int IdProyecto;
-    private int IdDesarrollador;
+    private int idProyDesar;
+    private int idProyecto;
+    private int idDesarrollador;
 
     public int getIdProyDesar() {
-        return IdProyDesar;
+        return idProyDesar;
     }
 
     public void setIdProyDesar(int idProyDesar) {
-        IdProyDesar = idProyDesar;
+        this.idProyDesar = idProyDesar;
     }
 
     public int getIdProyecto() {
-        return IdProyecto;
+        return idProyecto;
     }
 
     public void setIdProyecto(int idProyecto) {
-        IdProyecto = idProyecto;
+        this.idProyecto = idProyecto;
     }
 
     public int getIdDesarrollador() {
-        return IdDesarrollador;
+        return idDesarrollador;
     }
 
     public void setIdDesarrollador(int idDesarrollador) {
-        IdDesarrollador = idDesarrollador;
+        this.idDesarrollador = idDesarrollador;
     }
 }

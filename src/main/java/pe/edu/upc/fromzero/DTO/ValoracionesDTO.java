@@ -1,40 +1,40 @@
 package pe.edu.upc.fromzero.DTO;
 
 public class ValoracionesDTO {
-    private int IdValoracion;
-    private int IdProyecto;
-    private double Puntuacion;
-    private String Comentario;
+    private int idValoracion;
+    private int idProyecto;
+    private double puntuacion;
+    private String comentario;
 
     public int getIdValoracion() {
-        return IdValoracion;
+        return idValoracion;
     }
 
     public void setIdValoracion(int idValoracion) {
-        IdValoracion = idValoracion;
+        this.idValoracion = idValoracion;
     }
 
     public int getIdProyecto() {
-        return IdProyecto;
+        return idProyecto;
     }
 
     public void setIdProyecto(int idProyecto) {
-        IdProyecto = idProyecto;
+        this.idProyecto = idProyecto;
     }
 
     public double getPuntuacion() {
-        return Puntuacion;
+        return puntuacion;
     }
 
     public void setPuntuacion(double puntuacion) {
-        Puntuacion = puntuacion;
+        this.puntuacion = puntuacion;
     }
 
     public String getComentario() {
-        return Comentario;
+        return comentario;
     }
 
     public void setComentario(String comentario) {
-        Comentario = comentario;
+        this.comentario = comentario;
     }
 }

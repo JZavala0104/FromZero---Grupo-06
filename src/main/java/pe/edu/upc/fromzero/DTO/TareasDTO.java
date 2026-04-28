@@ -1,58 +1,58 @@
 package pe.edu.upc.fromzero.DTO;
 
 public class TareasDTO {
-    private int IdTarea;
-    private int IdProyecto;
-    private String Titulo;
-    private String Descripcion;
-    private String FechaLimite;
-    private String Estado;
+    private int idTarea;
+    private int idProyecto;
+    private String titulo;
+    private String descripcion;
+    private String fechaLimite;
+    private String estado;
 
     public int getIdTarea() {
-        return IdTarea;
+        return idTarea;
     }
 
     public void setIdTarea(int idTarea) {
-        IdTarea = idTarea;
+        this.idTarea = idTarea;
     }
 
     public int getIdProyecto() {
-        return IdProyecto;
+        return idProyecto;
     }
 
     public void setIdProyecto(int idProyecto) {
-        IdProyecto = idProyecto;
+        this.idProyecto = idProyecto;
     }
 
     public String getTitulo() {
-        return Titulo;
+        return titulo;
     }
 
     public void setTitulo(String titulo) {
-        Titulo = titulo;
+        this.titulo = titulo;
     }
 
     public String getDescripcion() {
-        return Descripcion;
+        return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
-        Descripcion = descripcion;
+        this.descripcion = descripcion;
     }
 
     public String getFechaLimite() {
-        return FechaLimite;
+        return fechaLimite;
     }
 
     public void setFechaLimite(String fechaLimite) {
-        FechaLimite = fechaLimite;
+        this.fechaLimite = fechaLimite;
     }
 
     public String getEstado() {
-        return Estado;
+        return estado;
     }
 
     public void setEstado(String estado) {
-        Estado = estado;
+        this.estado = estado;
     }
 }

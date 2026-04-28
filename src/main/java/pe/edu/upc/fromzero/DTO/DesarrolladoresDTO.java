@@ -1,49 +1,49 @@
 package pe.edu.upc.fromzero.DTO;
 
 public class DesarrolladoresDTO {
-    private int IdDesarrollador;
-    private int IdUser;
-    private String Habilidades;
-    private int Experiencia;
-    private String Portafolio;
+    private int idDesarrollador;
+    private int idUser;
+    private String habilidades;
+    private int experiencia;
+    private String portafolio;
 
     public int getIdDesarrollador() {
-        return IdDesarrollador;
+        return idDesarrollador;
     }
 
     public void setIdDesarrollador(int idDesarrollador) {
-        IdDesarrollador = idDesarrollador;
+        this.idDesarrollador = idDesarrollador;
     }
 
     public int getIdUser() {
-        return IdUser;
+        return idUser;
     }
 
     public void setIdUser(int idUser) {
-        IdUser = idUser;
+        this.idUser = idUser;
     }
 
     public String getHabilidades() {
-        return Habilidades;
+        return habilidades;
     }
 
     public void setHabilidades(String habilidades) {
-        Habilidades = habilidades;
+        this.habilidades = habilidades;
     }
 
     public int getExperiencia() {
-        return Experiencia;
+        return experiencia;
     }
 
     public void setExperiencia(int experiencia) {
-        Experiencia = experiencia;
+        this.experiencia = experiencia;
     }
 
     public String getPortafolio() {
-        return Portafolio;
+        return portafolio;
     }
 
     public void setPortafolio(String portafolio) {
-        Portafolio = portafolio;
+        this.portafolio = portafolio;
     }
 }

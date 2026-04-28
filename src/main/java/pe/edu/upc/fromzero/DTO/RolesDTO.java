@@ -2,7 +2,7 @@ package pe.edu.upc.fromzero.DTO;
 
 public class RolesDTO {
     private int IdRol;
-    private String Nombre;
+    private String nombre;
 
     public int getIdRol() {
         return IdRol;
@@ -13,10 +13,10 @@ public class RolesDTO {
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
-    public void setNombre(String nombre) {
-        Nombre = nombre;
+    public void setNombre(String Nombre) {
+        nombre = Nombre;
     }
 }

@@ -1,40 +1,40 @@
 package pe.edu.upc.fromzero.DTO;
 
 public class EmpresasDTO{
-    private int IdEmpresa;
-    private int IdUser;
-    private String NombreEmpresa;
-    private String Descripcion;
+    private int idEmpresa;
+    private int idUser;
+    private String nombreEmpresa;
+    private String descripcion;
 
     public int getIdEmpresa() {
-        return IdEmpresa;
+        return idEmpresa;
     }
 
     public void setIdEmpresa(int idEmpresa) {
-        IdEmpresa = idEmpresa;
+        this.idEmpresa = idEmpresa;
     }
 
     public int getIdUser() {
-        return IdUser;
+        return idUser;
     }
 
     public void setIdUser(int idUser) {
-        IdUser = idUser;
+        this.idUser = idUser;
     }
 
     public String getNombreEmpresa() {
-        return NombreEmpresa;
+        return nombreEmpresa;
     }
 
     public void setNombreEmpresa(String nombreEmpresa) {
-        NombreEmpresa = nombreEmpresa;
+        this.nombreEmpresa = nombreEmpresa;
     }
 
     public String getDescripcion() {
-        return Descripcion;
+        return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
-        Descripcion = descripcion;
+        this.descripcion = descripcion;
     }
 }

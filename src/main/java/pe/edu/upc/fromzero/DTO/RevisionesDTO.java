@@ -3,49 +3,49 @@ package pe.edu.upc.fromzero.DTO;
 import java.time.LocalDateTime;
 
 public class RevisionesDTO {
-    private int IdRevision;
-    private int IdTarea;
-    private String Comentar;
-    private String Estado;
-    private LocalDateTime Fecha;
+    private int idRevision;
+    private int idTarea;
+    private String comentar;
+    private String estado;
+    private LocalDateTime fecha;
 
     public int getIdRevision() {
-        return IdRevision;
+        return idRevision;
     }
 
     public void setIdRevision(int idRevision) {
-        IdRevision = idRevision;
+        this.idRevision = idRevision;
     }
 
     public int getIdTarea() {
-        return IdTarea;
+        return idTarea;
     }
 
     public void setIdTarea(int idTarea) {
-        IdTarea = idTarea;
+        this.idTarea = idTarea;
     }
 
     public String getComentar() {
-        return Comentar;
+        return comentar;
     }
 
     public void setComentar(String comentar) {
-        Comentar = comentar;
+        this.comentar = comentar;
     }
 
     public String getEstado() {
-        return Estado;
+        return estado;
     }
 
     public void setEstado(String estado) {
-        Estado = estado;
+        this.estado = estado;
     }
 
     public LocalDateTime getFecha() {
-        return Fecha;
+        return fecha;
     }
 
     public void setFecha(LocalDateTime fecha) {
-        Fecha = fecha;
+        this.fecha = fecha;
     }
 }

@@ -3,49 +3,49 @@ package pe.edu.upc.fromzero.DTO;
 import java.time.LocalDateTime;
 
 public class NotificacionesDTO {
-    private int IdNotification;
-    private int IdUser;
-    private String Mensaje;
-    private boolean Leido;
-    private LocalDateTime Fecha;
+    private int idNotification;
+    private int idUser;
+    private String mensaje;
+    private boolean leido;
+    private LocalDateTime fecha;
 
     public int getIdNotification() {
-        return IdNotification;
+        return idNotification;
     }
 
     public void setIdNotification(int idNotification) {
-        IdNotification = idNotification;
+        this.idNotification = idNotification;
     }
 
     public int getIdUser() {
-        return IdUser;
+        return idUser;
     }
 
     public void setIdUser(int idUser) {
-        IdUser = idUser;
+        this.idUser = idUser;
     }
 
     public String getMensaje() {
-        return Mensaje;
+        return mensaje;
     }
 
     public void setMensaje(String mensaje) {
-        Mensaje = mensaje;
+        this.mensaje = mensaje;
     }
 
     public boolean isLeido() {
-        return Leido;
+        return leido;
     }
 
     public void setLeido(boolean leido) {
-        Leido = leido;
+        this.leido = leido;
     }
 
     public LocalDateTime getFecha() {
-        return Fecha;
+        return fecha;
     }
 
     public void setFecha(LocalDateTime fecha) {
-        Fecha = fecha;
+        this.fecha = fecha;
     }
 }

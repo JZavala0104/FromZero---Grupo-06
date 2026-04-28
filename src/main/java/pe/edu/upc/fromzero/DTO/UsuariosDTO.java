@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 
 public class UsuariosDTO {
     private int IdUser;
-    private String Nombre;
-    private String Email;
-    private String Password;
-    private LocalDateTime FechaRegistro;
-    private int IdRol;
+    private String nombre;
+    private String email;
+    private String password;
+    private LocalDateTime fechaRegistro;
+    private int idRol;
 
     public int getIdUser() {
         return IdUser;
@@ -19,42 +19,42 @@ public class UsuariosDTO {
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
-    public void setNombre(String nombre) {
-        Nombre = nombre;
+    public void setNombre(String Nombre) {
+        nombre = Nombre;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
-    public void setEmail(String email) {
-        Email = email;
+    public void setEmail(String Email) {
+        email = Email;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
-    public void setPassword(String password) {
-        Password = password;
+    public void setPassword(String Password) {
+        password = Password;
     }
 
     public LocalDateTime getFechaRegistro() {
-        return FechaRegistro;
+        return fechaRegistro;
     }
 
-    public void setFechaRegistro(LocalDateTime fechaRegistro) {
-        FechaRegistro = fechaRegistro;
+    public void setFechaRegistro(LocalDateTime FechaRegistro) {
+        fechaRegistro = FechaRegistro;
     }
 
     public int getIdRol() {
-        return IdRol;
+        return idRol;
     }
 
-    public void setIdRol(int idRol) {
-        IdRol = idRol;
+    public void setIdRol(int IdRol) {
+        idRol = IdRol;
     }
 }

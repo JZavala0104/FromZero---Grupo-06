@@ -3,40 +3,40 @@ package pe.edu.upc.fromzero.DTO;
 import java.time.LocalDate;
 
 public class TipsIADTO {
-    private int IdTip;
-    private int IdUser;
-    private String Contenido;
-    private LocalDate Fecha;
+    private int idTip;
+    private int idUser;
+    private String contenido;
+    private LocalDate fecha;
 
     public int getIdTip() {
-        return IdTip;
+        return idTip;
     }
 
     public void setIdTip(int idTip) {
-        IdTip = idTip;
+        this.idTip = idTip;
     }
 
     public int getIdUser() {
-        return IdUser;
+        return idUser;
     }
 
     public void setIdUser(int idUser) {
-        IdUser = idUser;
+        this.idUser = idUser;
     }
 
     public String getContenido() {
-        return Contenido;
+        return contenido;
     }
 
     public void setContenido(String contenido) {
-        Contenido = contenido;
+        this.contenido = contenido;
     }
 
     public LocalDate getFecha() {
-        return Fecha;
+        return fecha;
     }
 
     public void setFecha(LocalDate fecha) {
-        Fecha = fecha;
+        this.fecha = fecha;
     }
 }

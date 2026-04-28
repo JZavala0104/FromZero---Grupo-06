@@ -5,58 +5,58 @@ import pe.edu.upc.fromzero.Entities.Usuarios;
 import java.time.LocalDateTime;
 
 public class CodigoGeneradoDTO {
-    private int IdCode;
-    private int IdUser;
-    private String Prompt;
-    private String Codigo;
-    private String Lenguaje;
-    private LocalDateTime Fecha;
+    private int idCode;
+    private int idUser;
+    private String prompt;
+    private String codigo;
+    private String lenguaje;
+    private LocalDateTime fecha;
 
     public int getIdCode() {
-        return IdCode;
+        return idCode;
     }
 
     public void setIdCode(int idCode) {
-        IdCode = idCode;
+        this.idCode = idCode;
     }
 
     public int getIdUser() {
-        return IdUser;
+        return idUser;
     }
 
     public void setIdUser(int idUser) {
-        IdUser = idUser;
+        this.idUser = idUser;
     }
 
     public String getPrompt() {
-        return Prompt;
+        return prompt;
     }
 
     public void setPrompt(String prompt) {
-        Prompt = prompt;
+        this.prompt = prompt;
     }
 
     public String getCodigo() {
-        return Codigo;
+        return codigo;
     }
 
     public void setCodigo(String codigo) {
-        Codigo = codigo;
+        this.codigo = codigo;
     }
 
     public String getLenguaje() {
-        return Lenguaje;
+        return lenguaje;
     }
 
     public void setLenguaje(String lenguaje) {
-        Lenguaje = lenguaje;
+        this.lenguaje = lenguaje;
     }
 
     public LocalDateTime getFecha() {
-        return Fecha;
+        return fecha;
     }
 
     public void setFecha(LocalDateTime fecha) {
-        Fecha = fecha;
+        this.fecha = fecha;
     }
 }
