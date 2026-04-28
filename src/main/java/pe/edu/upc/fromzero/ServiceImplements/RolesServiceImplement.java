@@ -7,6 +7,7 @@ import pe.edu.upc.fromzero.Repositories.IRolesRepository;
 import pe.edu.upc.fromzero.ServiceInterface.IRolesService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RolesServiceImplement implements IRolesService {
@@ -31,5 +32,10 @@ public class RolesServiceImplement implements IRolesService {
     @Override
     public void DeleteRol(int IdRol) {
         rolesRepository.deleteById(IdRol);
+    }
+
+    @Override
+    public Optional<Roles> GetRolById(int IdRol) {
+        return rolesRepository.findById(IdRol);
     }
 }
