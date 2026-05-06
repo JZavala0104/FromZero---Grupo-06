@@ -4,7 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.ObjectError;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +28,7 @@ public class QueryController {
     private IDesarrolladoresService DesarrolladoresService;
 
     @GetMapping("/Query1")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Gerente', 'Analista', 'Consultor', 'Empresa')")
     public ResponseEntity<?> Query1(){
         List<Object[]> Query1 = ProyectosService.GetQuery1();
         if(Query1.isEmpty()){
@@ -43,7 +44,9 @@ public class QueryController {
         }
         return ResponseEntity.ok(respuesta);
     }
+
     @GetMapping("/Query2")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Empresa', 'Gerente', 'Analista')")
     public ResponseEntity<?> Query2(){
         List<Object[]> Query2 = DesarrolladoresService.GetQuery2();
         if(Query2.isEmpty()){
@@ -64,6 +67,7 @@ public class QueryController {
     private ITareasService TareasService;
 
     @GetMapping("/Query3")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Gerente', 'Analista', 'Consultor')")
     public ResponseEntity<?> Query3(){
         List<Object[]> Query3 = ProyectosService.GetQuery3();
         if(Query3.isEmpty()){
@@ -82,6 +86,7 @@ public class QueryController {
     }
 
     @GetMapping("/Query4")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Moderador', 'Soporte', 'Gerente')")
     public ResponseEntity<?> Query4(){
         List<Object[]> Query4 = TareasService.GetQuery4();
         if(Query4.isEmpty()){

@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize; // Importación necesaria
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.fromzero.DTO.DesarrolladoresDTO;
 import pe.edu.upc.fromzero.Entities.Desarrolladores;
@@ -22,6 +23,8 @@ public class DesarrolladoresController {
 
     /*CRUD------------------------------------*/
 
+    // GET: Amplio acceso. Empresas, Gerentes y Analistas necesitan ver los perfiles para reclutar o evaluar.
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Desarrollador', 'Empresa', 'Gerente', 'Analista', 'Moderador')")
     @GetMapping("/Get")
     public ResponseEntity<?> GetDesarrolladores() {
         ModelMapper m = new ModelMapper();
@@ -35,6 +38,8 @@ public class DesarrolladoresController {
         return ResponseEntity.ok(listaDTO);
     }
 
+    // POST: Solo los administradores o los propios desarrolladores al registrar su perfil.
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Desarrollador')")
     @PostMapping("/Post")
     public ResponseEntity<?> PostDesarrolladores(@RequestBody DesarrolladoresDTO dto) {
         if (dto == null) {
@@ -47,6 +52,8 @@ public class DesarrolladoresController {
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevoDTO);
     }
 
+    // PUT: Desarrolladores actualizando su CV/Portafolio, o moderadores corrigiendo información.
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Desarrollador', 'Moderador')")
     @PutMapping("/Put")
     public ResponseEntity<?> PutDesarrolladores(@RequestBody DesarrolladoresDTO dto) {
         Optional<Desarrolladores> existente = DesarrolladoresService.GetDesarrolladorById(dto.getIdDesarrollador());
@@ -64,12 +71,13 @@ public class DesarrolladoresController {
         d.setHabilidades(dto.getHabilidades());
         d.setExperiencia(dto.getExperiencia());
         d.setPortafolio(dto.getPortafolio());
-        // El IdUser se mantiene vinculado a la entidad original o se mapea vía ModelMapper
 
         DesarrolladoresService.UpdateDesarrollador(d);
         return ResponseEntity.ok("Información del desarrollador actualizada");
     }
 
+    // DELETE: Acción crítica. Mejor dejarla solo para administradores.
+    @PreAuthorize("hasAuthority('Administrador')")
     @DeleteMapping("/Delete/{IdDesarrollador}")
     public ResponseEntity<?> DeleteDesarrolladores(@PathVariable("IdDesarrollador") int IdDesarrollador) {
         Optional<Desarrolladores> existente = DesarrolladoresService.GetDesarrolladorById(IdDesarrollador);

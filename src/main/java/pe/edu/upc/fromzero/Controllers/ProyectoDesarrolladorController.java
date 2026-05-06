@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.fromzero.DTO.ProyectoDesarrolladorDTO;
 import pe.edu.upc.fromzero.Entities.ProyectoDesarrollador;
@@ -23,6 +24,7 @@ public class ProyectoDesarrolladorController {
     /*CRUD------------------------------------*/
 
     @GetMapping("/Get")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Desarrollador', 'Empresa', 'Gerente', 'Analista', 'Moderador', 'Soporte')")
     public ResponseEntity<?> GetProyectoDesarrollador() {
         ModelMapper m = new ModelMapper();
         List<ProyectoDesarrolladorDTO> listaDTO = ProyectoDesarrolladorService.GetProyectoDesarrollador().stream()
@@ -36,6 +38,7 @@ public class ProyectoDesarrolladorController {
     }
 
     @PostMapping("/Post")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Empresa', 'Gerente')")
     public ResponseEntity<?> PostProyectoDesarrollador(@RequestBody ProyectoDesarrolladorDTO dto) {
         if (dto == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La asignación no puede ser nula");
@@ -48,6 +51,7 @@ public class ProyectoDesarrolladorController {
     }
 
     @PutMapping("/Put")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Empresa', 'Gerente', 'Moderador')")
     public ResponseEntity<?> PutProyectoDesarrollador(@RequestBody ProyectoDesarrolladorDTO dto) {
         Optional<ProyectoDesarrollador> existente = ProyectoDesarrolladorService.GetProyectoDesarrolladorById(dto.getIdProyDesar());
 
@@ -65,6 +69,7 @@ public class ProyectoDesarrolladorController {
     }
 
     @DeleteMapping("/Delete/{IdProyDesar}")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Empresa')")
     public ResponseEntity<?> DeleteProyectoDesarrollador(@PathVariable("IdProyDesar") int IdProyDesar) {
         Optional<ProyectoDesarrollador> existente = ProyectoDesarrolladorService.GetProyectoDesarrolladorById(IdProyDesar);
 

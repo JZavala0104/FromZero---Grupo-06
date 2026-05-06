@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.fromzero.DTO.TipsIADTO;
 import pe.edu.upc.fromzero.Entities.TipsIA;
@@ -23,6 +24,7 @@ public class TipsIAController {
     /*CRUD------------------------------------*/
 
     @GetMapping("/Get")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Desarrollador', 'Empresa', 'Moderador', 'Invitado', 'Soporte', 'Tester', 'Analista', 'Gerente', 'Consultor')")
     public ResponseEntity<?> GetTipsIA() {
         ModelMapper m = new ModelMapper();
         List<TipsIADTO> listaDTO = TipsIAService.GetTipsIA().stream()
@@ -36,6 +38,7 @@ public class TipsIAController {
     }
 
     @PostMapping("/Post")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Desarrollador', 'Moderador', 'Soporte')")
     public ResponseEntity<?> PostTipsIA(@RequestBody TipsIADTO dto) {
         if (dto == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El tip no puede ser nulo");
@@ -48,6 +51,7 @@ public class TipsIAController {
     }
 
     @PutMapping("/Put")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Desarrollador', 'Moderador', 'Soporte')")
     public ResponseEntity<?> PutTipsIA(@RequestBody TipsIADTO dto) {
         Optional<TipsIA> existente = TipsIAService.GetTipsIAById(dto.getIdTip());
 
@@ -60,16 +64,15 @@ public class TipsIAController {
         }
 
         TipsIA t = existente.get();
-        // Actualización de campos
         t.setContenido(dto.getContenido());
         t.setFecha(dto.getFecha());
-        // El IdUser se mapea automáticamente si el DTO tiene el campo correspondiente
 
         TipsIAService.UpdateTipsIA(t);
         return ResponseEntity.ok("Tip de IA actualizado correctamente");
     }
 
     @DeleteMapping("/Delete/{IdTip}")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Moderador')")
     public ResponseEntity<?> DeleteTipsIA(@PathVariable("IdTip") int IdTip) {
         Optional<TipsIA> existente = TipsIAService.GetTipsIAById(IdTip);
 

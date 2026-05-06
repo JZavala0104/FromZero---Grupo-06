@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize; // Importación necesaria
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.fromzero.DTO.MensajesDTO;
 import pe.edu.upc.fromzero.Entities.Mensajes;
@@ -23,6 +24,7 @@ public class MensajesController {
     /*CRUD------------------------------------*/
 
     @GetMapping("/Get")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Desarrollador', 'Empresa', 'Moderador', 'Soporte')")
     public ResponseEntity<?> GetMensajes() {
         ModelMapper m = new ModelMapper();
         List<MensajesDTO> listaDTO = MensajesService.GetMensaje().stream()
@@ -36,6 +38,7 @@ public class MensajesController {
     }
 
     @PostMapping("/Post")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Desarrollador', 'Empresa', 'Soporte')")
     public ResponseEntity<?> PostMensajes(@RequestBody MensajesDTO dto) {
         if (dto == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El mensaje no puede ser nulo");
@@ -48,6 +51,7 @@ public class MensajesController {
     }
 
     @PutMapping("/Put")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Desarrollador', 'Empresa', 'Moderador')")
     public ResponseEntity<?> PutMensajes(@RequestBody MensajesDTO dto) {
         Optional<Mensajes> existente = MensajesService.GetMensajeById(dto.getIdMensaje());
 
@@ -70,6 +74,7 @@ public class MensajesController {
     }
 
     @DeleteMapping("/Delete/{IdMensaje}")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Moderador')")
     public ResponseEntity<?> DeleteMensajes(@PathVariable("IdMensaje") int IdMensaje) {
         Optional<Mensajes> existente = MensajesService.GetMensajeById(IdMensaje);
 

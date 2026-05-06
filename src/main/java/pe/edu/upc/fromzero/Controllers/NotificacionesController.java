@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.fromzero.DTO.NotificacionesDTO;
 import pe.edu.upc.fromzero.Entities.Notificaciones;
@@ -23,6 +24,7 @@ public class NotificacionesController {
     /*CRUD------------------------------------*/
 
     @GetMapping("/Get")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Desarrollador', 'Empresa', 'Moderador', 'Soporte', 'Invitado', 'Tester', 'Analista', 'Gerente', 'Consultor')")
     public ResponseEntity<?> GetNotificaciones() {
         ModelMapper m = new ModelMapper();
         List<NotificacionesDTO> listaDTO = NotificacionesService.GetNotificacion().stream()
@@ -36,6 +38,7 @@ public class NotificacionesController {
     }
 
     @PostMapping("/Post")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Moderador', 'Soporte')")
     public ResponseEntity<?> PostNotificaciones(@RequestBody NotificacionesDTO dto) {
         if (dto == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La notificación no puede ser nula");
@@ -48,6 +51,7 @@ public class NotificacionesController {
     }
 
     @PutMapping("/Put")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Desarrollador', 'Empresa', 'Moderador', 'Soporte')")
     public ResponseEntity<?> PutNotificaciones(@RequestBody NotificacionesDTO dto) {
         Optional<Notificaciones> existente = NotificacionesService.GetNotificacionById(dto.getIdNotification());
 
@@ -70,6 +74,7 @@ public class NotificacionesController {
     }
 
     @DeleteMapping("/Delete/{IdNotification}")
+    @PreAuthorize("hasAuthority('Administrador')")
     public ResponseEntity<?> DeleteNotificaciones(@PathVariable("IdNotification") int IdNotification) {
         Optional<Notificaciones> existente = NotificacionesService.GetNotificacionById(IdNotification);
 

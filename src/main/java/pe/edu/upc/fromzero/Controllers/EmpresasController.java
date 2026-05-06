@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize; // Importación necesaria
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.fromzero.DTO.EmpresasDTO;
 import pe.edu.upc.fromzero.Entities.Empresas;
@@ -22,6 +23,8 @@ public class EmpresasController {
 
     /*CRUD------------------------------------*/
 
+    // GET: Amplio acceso. Desarrolladores y otros perfiles necesitan ver a las empresas.
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Desarrollador', 'Empresa', 'Gerente', 'Analista', 'Moderador')")
     @GetMapping("/Get")
     public ResponseEntity<?> GetEmpresas() {
         ModelMapper m = new ModelMapper();
@@ -35,6 +38,8 @@ public class EmpresasController {
         return ResponseEntity.ok(listaDTO);
     }
 
+    // POST: Administradores o las propias empresas al crear su perfil.
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Empresa')")
     @PostMapping("/Post")
     public ResponseEntity<?> PostEmpresas(@RequestBody EmpresasDTO dto) {
         if (dto == null) {
@@ -47,6 +52,8 @@ public class EmpresasController {
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevaDTO);
     }
 
+    // PUT: Empresas actualizando su perfil o moderadores corrigiendo datos.
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Empresa', 'Moderador')")
     @PutMapping("/Put")
     public ResponseEntity<?> PutEmpresas(@RequestBody EmpresasDTO dto) {
         Optional<Empresas> existente = EmpresasService.GetEmpresaById(dto.getIdEmpresa());
@@ -67,6 +74,8 @@ public class EmpresasController {
         return ResponseEntity.ok("Información de la empresa actualizada");
     }
 
+    // DELETE: Acción crítica, reservada para el administrador.
+    @PreAuthorize("hasAuthority('Administrador')")
     @DeleteMapping("/Delete/{IdEmpresa}")
     public ResponseEntity<?> DeleteEmpresas(@PathVariable("IdEmpresa") int IdEmpresa) {
         Optional<Empresas> existente = EmpresasService.GetEmpresaById(IdEmpresa);

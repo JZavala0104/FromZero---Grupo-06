@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize; // Importación necesaria
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.fromzero.DTO.ValoracionesDTO;
 import pe.edu.upc.fromzero.Entities.Valoraciones;
@@ -23,6 +24,7 @@ public class ValoracionesController {
     /*CRUD------------------------------------*/
 
     @GetMapping("/Get")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Desarrollador', 'Empresa', 'Moderador', 'Invitado', 'Soporte', 'Tester', 'Analista', 'Gerente', 'Consultor')")
     public ResponseEntity<?> GetValoraciones() {
         ModelMapper m = new ModelMapper();
         List<ValoracionesDTO> listaDTO = ValoracionesService.GetValoracion().stream()
@@ -36,6 +38,7 @@ public class ValoracionesController {
     }
 
     @PostMapping("/Post")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Desarrollador', 'Empresa', 'Moderador')")
     public ResponseEntity<?> PostValoraciones(@RequestBody ValoracionesDTO dto) {
         if (dto == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La valoración no puede ser nula");
@@ -48,6 +51,7 @@ public class ValoracionesController {
     }
 
     @PutMapping("/Put")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Desarrollador', 'Empresa', 'Moderador')")
     public ResponseEntity<?> PutValoraciones(@RequestBody ValoracionesDTO dto) {
         Optional<Valoraciones> existente = ValoracionesService.GetValoracionById(dto.getIdValoracion());
 
@@ -63,13 +67,13 @@ public class ValoracionesController {
         // Actualización de campos
         v.setPuntuacion(dto.getPuntuacion());
         v.setComentario(dto.getComentario());
-        // El IdProyecto se actualiza mediante ModelMapper si está presente en el DTO
 
         ValoracionesService.UpdateValoracion(v);
         return ResponseEntity.ok("Valoración actualizada correctamente");
     }
 
     @DeleteMapping("/Delete/{IdValoracion}")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Moderador')")
     public ResponseEntity<?> DeleteValoraciones(@PathVariable("IdValoracion") int IdValoracion) {
         Optional<Valoraciones> existente = ValoracionesService.GetValoracionById(IdValoracion);
 

@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.fromzero.DTO.CodigoGeneradoDTO;
 import pe.edu.upc.fromzero.Entities.CodigoGenerado;
@@ -21,8 +22,8 @@ public class CodigoGeneradoController {
     private ICodigoGeneradoService CodigoGeneradoService;
 
     /*CRUD------------------------------------*/
-
     @GetMapping("/Get")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Desarrollador', 'Tester', 'Analista', 'Soporte', 'Gerente', 'Consultor')")
     public ResponseEntity<?> GetCodigoGenerado() {
         ModelMapper m = new ModelMapper();
         List<CodigoGeneradoDTO> listaDTO = CodigoGeneradoService.GetCodigoGenerado().stream()
@@ -36,6 +37,7 @@ public class CodigoGeneradoController {
     }
 
     @PostMapping("/Post")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Desarrollador', 'Empresa')")
     public ResponseEntity<?> PostCodigoGenerado(@RequestBody CodigoGeneradoDTO dto) {
         if (dto == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El código generado no puede ser nulo");
@@ -48,6 +50,7 @@ public class CodigoGeneradoController {
     }
 
     @PutMapping("/Put")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Desarrollador', 'Moderador')")
     public ResponseEntity<?> PutCodigoGenerado(@RequestBody CodigoGeneradoDTO dto) {
         Optional<CodigoGenerado> existente = CodigoGeneradoService.GetCodigoGeneradoById(dto.getIdCode());
 
@@ -71,6 +74,7 @@ public class CodigoGeneradoController {
     }
 
     @DeleteMapping("/Delete/{IdCode}")
+    @PreAuthorize("hasAnyAuthority('Administrador')")
     public ResponseEntity<?> DeleteCodigoGenerado(@PathVariable("IdCode") int IdCode) {
         Optional<CodigoGenerado> existente = CodigoGeneradoService.GetCodigoGeneradoById(IdCode);
 

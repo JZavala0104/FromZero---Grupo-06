@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.fromzero.DTO.RevisionesDTO;
 import pe.edu.upc.fromzero.Entities.Revisiones;
@@ -23,6 +24,7 @@ public class RevisionesController {
     /*CRUD------------------------------------*/
 
     @GetMapping("/Get")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Desarrollador', 'Empresa', 'Moderador', 'Tester', 'Soporte')")
     public ResponseEntity<?> GetRevisiones() {
         ModelMapper m = new ModelMapper();
         List<RevisionesDTO> listaDTO = RevisionesService.GetRevision().stream()
@@ -36,6 +38,7 @@ public class RevisionesController {
     }
 
     @PostMapping("/Post")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Empresa', 'Moderador', 'Tester')")
     public ResponseEntity<?> PostRevisiones(@RequestBody RevisionesDTO dto) {
         if (dto == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La revisión no puede ser nula");
@@ -48,6 +51,7 @@ public class RevisionesController {
     }
 
     @PutMapping("/Put")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Empresa', 'Moderador', 'Tester')")
     public ResponseEntity<?> PutRevisiones(@RequestBody RevisionesDTO dto) {
         Optional<Revisiones> existente = RevisionesService.GetRevisionById(dto.getIdRevision());
 
@@ -60,17 +64,16 @@ public class RevisionesController {
         }
 
         Revisiones r = existente.get();
-        // Actualización de campos manual según tu estructura
         r.setComentar(dto.getComentar());
         r.setEstado(dto.getEstado());
         r.setFecha(dto.getFecha());
-        // El vínculo con Tareas se gestiona usualmente por ModelMapper a través del ID en el DTO
 
         RevisionesService.UpdateRevision(r);
         return ResponseEntity.ok("Revisión actualizada correctamente");
     }
 
     @DeleteMapping("/Delete/{IdRevision}")
+    @PreAuthorize("hasAnyAuthority('Administrador', 'Empresa')")
     public ResponseEntity<?> DeleteRevisiones(@PathVariable("IdRevision") int IdRevision) {
         Optional<Revisiones> existente = RevisionesService.GetRevisionById(IdRevision);
 
