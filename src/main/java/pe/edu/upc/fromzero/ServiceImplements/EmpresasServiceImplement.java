@@ -37,4 +37,9 @@ public class EmpresasServiceImplement implements IEmpresasService {
     public Optional<Empresas> GetEmpresaById(int IdEmpresa) {
         return ESRepository.findById(IdEmpresa);
     }
+
+    @Override
+    public List<Object[]> GetQuery1() {
+        return ESRepository.getQuery1();
+    }
 }

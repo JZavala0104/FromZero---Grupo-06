@@ -11,4 +11,5 @@ public interface IEmpresasService {
     public void UpdateEmpresa(Empresas empresa);
     public void DeleteEmpresa(int IdEmpresa);
     public Optional<Empresas> GetEmpresaById(int IdEmpresa);
+    List<Object[]> GetQuery1();
 }

@@ -8,16 +8,6 @@ import java.util.List;
 
 @Repository
 public interface IProyectosRepository extends JpaRepository<Proyectos, Integer> {
-    @Query(value = "SELECT\n" +
-            "    p.titulo AS Proyecto,\n" +
-            "    e.nombre_empresa AS Cliente,\n" +
-            "    u.nombre AS Desarrollador\n" +
-            "FROM proyectos p\n" +
-            "         JOIN empresas e ON p.id_empresa = e.id_empresa\n" +
-            "         JOIN proyecto_desarrollador pd ON p.id_project = pd.id_proyecto\n" +
-            "         JOIN desarrolladores d ON pd.id_desarrollador = d.id_desarrollador\n" +
-            "         JOIN usuarios u ON d.id_user = u.id_user",nativeQuery = true)
-    List<Object[]> getQuery1();
 
     @Query(value = "SELECT " +
             "p.titulo AS Titulo, " +

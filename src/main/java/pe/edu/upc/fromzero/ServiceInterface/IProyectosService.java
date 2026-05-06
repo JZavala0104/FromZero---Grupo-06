@@ -10,6 +10,5 @@ public interface IProyectosService {
     public void UpdateProyecto(Proyectos proyecto);
     public void DeleteProyecto(int IdProyecto);
     public Optional<Proyectos> GetProyectoById(int IdProyecto);
-    List<Object[]> GetQuery1();
     List<Object[]> GetQuery3();
 }

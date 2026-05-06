@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pe.edu.upc.fromzero.DTO.Query1DTO;
 import pe.edu.upc.fromzero.DTO.Query2DTO;
 import pe.edu.upc.fromzero.ServiceInterface.IDesarrolladoresService;
+import pe.edu.upc.fromzero.ServiceInterface.IEmpresasService;
 import pe.edu.upc.fromzero.ServiceInterface.IProyectosService;
 import pe.edu.upc.fromzero.DTO.Query3DTO;
 import pe.edu.upc.fromzero.DTO.Query4DTO;
@@ -23,6 +24,8 @@ import java.util.List;
 @RequestMapping("/api/query")
 public class QueryController {
     @Autowired
+    private IEmpresasService EmpresasService;
+    @Autowired
     private IProyectosService ProyectosService;
     @Autowired
     private IDesarrolladoresService DesarrolladoresService;
@@ -30,16 +33,18 @@ public class QueryController {
     @GetMapping("/Query1")
     @PreAuthorize("hasAnyAuthority('Administrador', 'Gerente', 'Analista', 'Consultor', 'Empresa')")
     public ResponseEntity<?> Query1(){
-        List<Object[]> Query1 = ProyectosService.GetQuery1();
+        List<Object[]> Query1 = EmpresasService.GetQuery1();
         if(Query1.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay datos");
         }
         List<Query1DTO> respuesta = new ArrayList<>();
         for(Object[] fila: Query1){
             Query1DTO dto = new Query1DTO();
-            dto.setProyecto((String) fila[0]);
-            dto.setCliente((String) fila[1]);
-            dto.setDesarrollador((String) fila[2]);
+            dto.setEmpresa((String) fila[0]);
+            dto.setTotal_Proyectos(((Number) fila[1]).intValue());
+            dto.setInversion_Total(((Number) fila[2]).doubleValue());
+            dto.setTotal_Tareas_Asignadas(((Number) fila[3]).intValue());
+            dto.setPresupuesto_Promedio(((Number) fila[4]).doubleValue());
             respuesta.add(dto);
         }
         return ResponseEntity.ok(respuesta);
@@ -47,19 +52,26 @@ public class QueryController {
 
     @GetMapping("/Query2")
     @PreAuthorize("hasAnyAuthority('Administrador', 'Empresa', 'Gerente', 'Analista')")
-    public ResponseEntity<?> Query2(){
+    public ResponseEntity<?> Query2() {
         List<Object[]> Query2 = DesarrolladoresService.GetQuery2();
-        if(Query2.isEmpty()){
+
+        if (Query2.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay datos");
         }
+
         List<Query2DTO> respuesta = new ArrayList<>();
-        for(Object[] fila: Query2){
+
+        for (Object[] fila : Query2) {
             Query2DTO dto = new Query2DTO();
-            dto.setNombre((String) fila[0]);
-            dto.setHabilidades((String) fila[1]);
-            dto.setExperiencia(((Number) fila[2]).intValue());
+            dto.setDesarrollador((String) fila[0]);
+            dto.setAños_Exp(fila[1] != null ? ((Number) fila[1]).intValue() : 0);
+            dto.setSkills((String) fila[2]);
+            dto.setProyectos_Participados(fila[3] != null ? ((Number) fila[3]).intValue() : 0);
+            dto.setReputacion_Promedio(fila[4] != null ? ((Number) fila[4]).doubleValue() : 0.0);
+            dto.setCantidad_Valoraciones(fila[5] != null ? ((Number) fila[5]).intValue() : 0);
             respuesta.add(dto);
         }
+
         return ResponseEntity.ok(respuesta);
     }
 
