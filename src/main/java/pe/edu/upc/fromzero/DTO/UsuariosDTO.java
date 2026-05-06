@@ -4,10 +4,12 @@ import java.time.LocalDateTime;
 
 public class UsuariosDTO {
     private int IdUser;
+    private String Username;
     private String nombre;
     private String email;
     private String password;
     private LocalDateTime fechaRegistro;
+    private boolean Habilitado;
     private int idRol;
 
     public int getIdUser() {
@@ -16,6 +18,14 @@ public class UsuariosDTO {
 
     public void setIdUser(int idUser) {
         IdUser = idUser;
+    }
+
+    public String getUsername() {
+        return Username;
+    }
+
+    public void setUsername(String username) {
+        Username = username;
     }
 
     public String getNombre() {
@@ -48,6 +58,14 @@ public class UsuariosDTO {
 
     public void setFechaRegistro(LocalDateTime FechaRegistro) {
         fechaRegistro = FechaRegistro;
+    }
+
+    public boolean isHabilitado() {
+        return Habilitado;
+    }
+
+    public void setHabilitado(boolean habilitado) {
+        Habilitado = habilitado;
     }
 
     public int getIdRol() {

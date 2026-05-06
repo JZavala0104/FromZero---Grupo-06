@@ -2,15 +2,18 @@ package pe.edu.upc.fromzero.Entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Usuarios")
-public class Usuarios {
+public class Usuarios implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int IdUser;
+    @Column(name = "Username",length = 20,nullable = false)
+    private String username;
     @Column(name = "Nombre",length = 100,nullable = false)
     private String Nombre;
     @Column(name = "Email",length = 100,nullable = false)
@@ -19,6 +22,8 @@ public class Usuarios {
     private String Password;
     @Column(name = "FechaRegistro",nullable = false)
     private LocalDateTime FechaRegistro;
+    @Column(name = "Habilitado",nullable = false)
+    private boolean Habilitado;
     @ManyToOne
     @JoinColumn(name = "IdRol")
     private Roles IdRol;
@@ -26,12 +31,14 @@ public class Usuarios {
     public Usuarios() {
     }
 
-    public Usuarios(int idUser, String name, String email, String password, LocalDateTime registerDate, Roles idRol) {
+    public Usuarios(int idUser, String Username, String nombre, String email, String password, LocalDateTime fechaRegistro, boolean habilitado, Roles idRol) {
         IdUser = idUser;
-        Nombre = name;
+        username = Username;
+        Nombre = nombre;
         Email = email;
         Password = password;
-        FechaRegistro = registerDate;
+        FechaRegistro = fechaRegistro;
+        Habilitado = habilitado;
         IdRol = idRol;
     }
 
@@ -41,6 +48,14 @@ public class Usuarios {
 
     public void setIdUser(int idUser) {
         IdUser = idUser;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getNombre() {
@@ -75,6 +90,14 @@ public class Usuarios {
         FechaRegistro = registerDate;
     }
 
+    public boolean isHabilitado() {
+        return Habilitado;
+    }
+
+    public void setHabilitado(boolean habilitado) {
+        Habilitado = habilitado;
+    }
+
     public Roles getIdRol() {
         return IdRol;
     }
@@ -82,4 +105,5 @@ public class Usuarios {
     public void setIdRol(Roles idRol) {
         IdRol = idRol;
     }
+
 }

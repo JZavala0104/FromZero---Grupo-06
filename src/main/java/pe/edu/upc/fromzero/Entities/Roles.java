@@ -2,9 +2,11 @@ package pe.edu.upc.fromzero.Entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "Roles")
-public class Roles {
+public class Roles implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int IdRol;
