@@ -11,4 +11,5 @@ public interface INotificacionesService {
     public void UpdateNotificacion(Notificaciones notificacion);
     public void DeleteNotificacion(int IdNotificacion);
     public Optional<Notificaciones> GetNotificacionById(int IdNotificacion);
+    List<Object[]> GetQuery5();
 }

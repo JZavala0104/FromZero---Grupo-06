@@ -10,4 +10,5 @@ public interface IRevisionesService {
     public void UpdateRevision(Revisiones revision);
     public void DeleteRevision(int IdRevision);
     public Optional<Revisiones> GetRevisionById(int IdRevision);
+    List<Object[]> GetQuery6();
 }

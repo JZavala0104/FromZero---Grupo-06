@@ -8,13 +8,8 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pe.edu.upc.fromzero.DTO.Query1DTO;
-import pe.edu.upc.fromzero.DTO.Query2DTO;
-import pe.edu.upc.fromzero.ServiceInterface.IDesarrolladoresService;
-import pe.edu.upc.fromzero.ServiceInterface.IProyectosService;
-import pe.edu.upc.fromzero.DTO.Query3DTO;
-import pe.edu.upc.fromzero.DTO.Query4DTO;
-import pe.edu.upc.fromzero.ServiceInterface.ITareasService;
+import pe.edu.upc.fromzero.DTO.*;
+import pe.edu.upc.fromzero.ServiceInterface.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +21,11 @@ public class QueryController {
     private IProyectosService ProyectosService;
     @Autowired
     private IDesarrolladoresService DesarrolladoresService;
+    @Autowired
+    private INotificacionesService NotificacionesService;
+
+    @Autowired
+    private IRevisionesService RevisionesService;
 
     @GetMapping("/Query1")
     public ResponseEntity<?> Query1(){
@@ -98,4 +98,41 @@ public class QueryController {
         }
         return ResponseEntity.ok(respuesta);
     }
+
+    @GetMapping("/Query5")
+    public ResponseEntity<?> Query5() {
+        List<Object[]> Query5 = NotificacionesService.GetQuery5();
+        if (Query5.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay datos");
+        }
+        List<Query5DTO> respuesta = new ArrayList<>();
+        for (Object[] fila : Query5) {
+            Query5DTO dto = new Query5DTO();
+            dto.setUsuario((String) fila[0]);
+            dto.setMensaje((String) fila[1]);
+            dto.setFecha(fila[2].toString());
+            respuesta.add(dto);
+        }
+        return ResponseEntity.ok(respuesta);
+    }
+
+    @GetMapping("/Query6")
+    public ResponseEntity<?> Query6() {
+        List<Object[]> Query6 = RevisionesService.GetQuery6();
+        if (Query6.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay datos");
+        }
+        List<Query6DTO> respuesta = new ArrayList<>();
+        for (Object[] fila : Query6) {
+            Query6DTO dto = new Query6DTO();
+            dto.setTarea((String) fila[0]);
+            dto.setProyecto((String) fila[1]);
+            dto.setEstado((String) fila[2]);
+            dto.setComentario((String) fila[3]);
+            dto.setFecha(fila[4].toString());
+            respuesta.add(dto);
+        }
+        return ResponseEntity.ok(respuesta);
+    }
+
 }

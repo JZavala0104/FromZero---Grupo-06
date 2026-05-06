@@ -37,4 +37,10 @@ public class NotificacionesServiceImplement implements INotificacionesService {
     public Optional<Notificaciones> GetNotificacionById(int IdNotificacion) {
         return NSRepository.findById(IdNotificacion);
     }
+
+    @Override
+    public List<Object[]> GetQuery5() {
+        return NSRepository.getQuery5();
+    }
+
 }

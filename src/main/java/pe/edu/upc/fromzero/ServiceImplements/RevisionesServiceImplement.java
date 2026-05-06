@@ -38,4 +38,9 @@ public class RevisionesServiceImplement implements IRevisionesService {
     public Optional<Revisiones> GetRevisionById(int IdRevision) {
         return revisionesRepository.findById(IdRevision);
     }
+
+    @Override
+    public List<Object[]> GetQuery6() {
+        return revisionesRepository.getQuery6();
+    }
 }
